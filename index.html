@@ -279,66 +279,46 @@
 
     <!-- Graphs -->
     <script src="https://unpkg.com/echarts@4.2.0-rc.2/dist/echarts.min.js"></script>
-    <script src="https://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('myChart'), 'light');
 
-        // 指定图表的配置项和数据
-        var option = {
-
-            tooltip: {
-                trigger: 'item'
+        var app = {};
+        option = null;
+        option = {
+            legend: {},
+            tooltip: {},
+            dataset: {
+                source: [
+                    ['product', '2015', '2016', '2017'],
+                    ['Matcha Latte', 43.3, 85.8, 93.7],
+                    ['Milk Tea', 83.1, 73.4, 55.1],
+                    ['Cheese Cocoa', 86.4, 65.2, 82.5],
+                    ['Walnut Brownie', 72.4, 53.9, 39.1]
+                ]
             },
-
-            //配置属性
+            xAxis: {
+                type: 'category'
+            },
+            yAxis: {},
+            // Declare several bar series, each will be mapped
+            // to a column of dataset.source by default.
             series: [{
-                name: '各省数量分布',
-                type: 'map',
-                mapType: 'china',
-                roam: false,
-                zoom: 1.2,
-                selectedMode: 'multiple',
-                label: {
-                    show: true,
-
+                    type: 'bar'
                 },
-                // 高亮样式。
-                emphasis: {
-                    itemStyle: {
-                        // 高亮时点的颜色。
-                        color: 'blue'
-                    },
-                    label: {
-                        show: true,
-                        // 高亮时标签的文字。
-                        formatter: '{b}',
-                    }
+                {
+                    type: 'bar'
                 },
-
-                tooltip: {
-                    padding: 10,
-                    backgroundColor: '#222',
-                    borderColor: '#777',
-                    borderWidth: 1,
-                    formatter: function (obj) {
-                        return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
-                            obj.seriesName +
-                            '</div>' +
-                            '省份' + '：' + obj.name + '<br>' +
-                            '数据' + '：' + obj.value + '<br>';
-                    }
-
-                },
-
-                data: []
-            }]
-        };
-
-        /**
-         * 使用刚指定的配置项和数据显示图表。
-         * */
-        myChart.setOption(option);
+                {
+                    type: 'bar'
+                }
+            ]
+        };;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+        
     </script>
 
 
